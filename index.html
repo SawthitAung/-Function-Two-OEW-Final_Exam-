@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="my">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marine Engineering Watch Part (II) - Prep</title>
+
+    <link rel="icon" type="image/png" href="photo00022.png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style_f2.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo-area">
+        <img src="download.png" alt="Logo" class="site-logo" />
+      </div>
+      <div class="title-area">
+        <h1>Marine Engineering Watch Part (I)</h1>
+        <p>OEW Batch 48 - Exam Preparation</p>
+        <p>Function Two</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <section class="quiz-section">
+        <div class="section-title">
+          <i class="fas fa-list-check section-icon"></i>
+          <h2>Part I: Multiple Choice</h2>
+        </div>
+        <div id="mcq-container"></div>
+      </section>
+
+      <section class="quiz-section">
+        <div class="section-title">
+          <i class="fas fa-pen-to-square section-icon"></i>
+          <h2>Part II: Fill in the Blanks</h2>
+        </div>
+        <div id="fill-container"></div>
+      </section>
+
+      <section class="quiz-section">
+        <div class="section-title">
+          <i class="fas fa-file-lines section-icon"></i>
+          <h2>Part III: Short Questions</h2>
+        </div>
+        <div id="short-container"></div>
+      </section>
+
+      <div class="action-area">
+        <button class="submit-btn" onclick="calculateResult()">
+          အမှတ်စစ်ဆေးမည်
+        </button>
+      </div>
+
+      <div id="result-sheet" class="result-card" style="display: none">
+        <h2><i class="fas fa-clipboard-check"></i> Assessment Report</h2>
+        <div class="result-grid">
+          <div class="res-item">
+            <span>Part I: Multiple Choice:</span>
+            <strong id="p1-res">0 / 0</strong>
+          </div>
+          <div class="res-item">
+            <span>Part II: Fill in the Blanks:</span>
+            <strong id="p2-res">0 / 0</strong>
+          </div>
+          <div class="res-item">
+            <span>Part III: Short Questions:</span>
+            <strong id="p3-res">0 / 0</strong>
+          </div>
+        </div>
+        <div class="final-score-area">
+          <h3 id="final-percent">Total: 0%</h3>
+          <h2 id="final-status">STATUS</h2>
+        </div>
+        <button class="nav-btn" onclick="window.location.reload()">
+          Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // မေးခွန်းဒေတာများ
+      const mcqData = [
+        {
+          q: "Current clamp meter acts as a current transformer to measure the :",
+          options: ["voltage", "Resistance", "Current", "Power factor"],
+          correct: 2,
+        },
+        {
+          q: "Preference trip relay acts :",
+          options: [
+            "To produce generator.",
+            "To trip selected none essential loads.",
+            "To trip the generator main circuit breaker.",
+            "To raise the engine revolution.",
+          ],
+          correct: 1,
+        },
+        {
+          q: "An induction motor has been flooded with sea water and its insulation resistance is down to zero mega ohms.",
+          options: [
+            "Cleaning with fresh water.",
+            "Drying.",
+            "Revarnishing.",
+            "Above all.",
+          ],
+          correct: 3,
+        },
+        {
+          q: "Single phasing means :",
+          options: [
+            "All the phase out of power.",
+            "One of the phase out of power.",
+            "Over voltage of the motor.",
+            "None of above.",
+          ],
+          correct: 1,
+        },
+        {
+          q: "D.P.D.T stand for :",
+          options: [
+            "Duplex-pole duplex terminal.",
+            "Double-pole duplex termianl.",
+            "Double-pole double-throw switch.",
+            "Direct power to direct terminal.",
+          ],
+          correct: 2,
+        },
+        {
+          q: "The electrolyte in a lead-acid storage battery is :",
+          options: ["HC.", "H2SO4", "CaCi2", "MgCI2"],
+          correct: 1,
+        },
+        {
+          q: "Hydrometer is used to measure the :",
+          options: [
+            "Internal temperature of a battery.",
+            "Acid content of a battery",
+            "Specific gravity of the battery electrolyte",
+            "Water content of a battery",
+          ],
+          correct: 2,
+        },
+        {
+          q: "Brushes are made of :",
+          options: ["Lead.", "Castile", "Carbon", "Lignite"],
+          correct: 2,
+        },
+        {
+          q: "Brushless A.C generator E.M.F voltage is produced from :",
+          options: ["Stator.", "Rotating.", "Slip ring.", "Field exciter."],
+          correct: 0,
+        },
+        {
+          q: "If the running motor has 4 poles & 50 Hz, R.P.M should be :",
+          options: ["1000", "1500", "500", "2000"],
+          correct: 1,
+        },
+        {
+          q: "Battery terminals are suitable to be used :",
+          options: [
+            "Grease",
+            "Petroleum jelly",
+            "Lubricating oil",
+            "Crude oil",
+          ],
+          correct: 1,
+        },
+        {
+          q: "The horsepower of a motor with effective resistance of 2 ohm on a 110 volts line is :",
+          options: [
+            "16 horsepower",
+            "12 horsepower",
+            "8 horsepower",
+            "10 horsepower",
+          ],
+          correct: 2,
+        },
+        {
+          q: "Which of the following instrument can be used to measure wire size?",
+          options: ["anemometer.", "micrometer.", "mugger.", "dividers."],
+          correct: 1,
+        },
+        {
+          q: "Which of the following item is necessary to keep a storage battery in good operation?",
+          options: [
+            "maintain proper specific gravity.",
+            "keep cool and well ventilated..",
+            "maintain proper level of electrolyte.",
+            "All of above.",
+          ],
+          correct: 3,
+        },
+        {
+          q: "Which of the following is not a good conductor of electricity?",
+          options: ["Copper.", "Mica.", "Silver.", "Aluminum."],
+          correct: 1,
+        },
+        {
+          q: "Before working on an electrical circuit:",
+          options: [
+            "open the switch.",
+            "lock the switch 'do not close '",
+            "have required tools and meters ready.",
+            "all the above.",
+          ],
+          correct: 3,
+        },
+        {
+          q: "A full charged battery reads from:",
+          options: [
+            "1.27 - 1.285.",
+            "1.025 - 1.1075",
+            "1.185 - 1.190",
+            "1.20 - 1.50",
+          ],
+          correct: 0,
+        },
+        {
+          q: "If a step-down transformer has 120 volts in the primary and the turns ratio is 6:1, the secondary will put out:",
+          options: ["60 volts.", "16 volts.", "20 volts.", "720 volts."],
+          correct: 2,
+        },
+        {
+          q: "When using ohm's law, E/R would solve for:",
+          options: ["ampere.", "voltage.", "watts.", "resistance."],
+          correct: 0,
+        },
+        {
+          q: "Motor revolution rating is depend on:",
+          options: [
+            "frequency.",
+            "number of poles.",
+            "voltage.",
+            "All of above.",
+          ],
+          correct: 3,
+        },
+      ];
+      const fillData = [
+        {
+          q: "In pure sinusoidal wave, root mean square value is 0.707 times maximum value.",
+          correct: "true",
+        },
+        {
+          q: "SSD means Solid State Devices.",
+          correct: "false",
+        },
+        {
+          q: "AC current can be measured by using Clamp Meter.",
+          correct: "true",
+        },
+        {
+          q: "SPDT stand for Single Pole Dead Throw switch.",
+          correct: "false",
+        },
+        {
+          q: "In electric motor name plate FLC is Full Load Current.",
+          correct: "true",
+        },
+        {
+          q: "In pure sinusoidal wave, root mean square value is 7.07 times maximum value.",
+          correct: "false",
+        },
+        {
+          q: "Two fundamental type of DC motors are series and shunt motors.",
+          correct: "true",
+        },
+        {
+          q: "The most common type of Mercury gas is used in discharge lamps.",
+          correct: "true",
+        },
+        {
+          q: "Frequency is measured unit Hertz.",
+          correct: "true",
+        },
+        {
+          q: "In low voltage system megger meter produces 500 volts DC.",
+          correct: "true",
+        },
+        {
+          q: "In lead acid battery each cell contain 2.0 volts.",
+          correct: "true",
+        },
+        {
+          q: "A device which converts DC to AC is called Inverter.",
+          correct: "true",
+        },
+        {
+          q: "Specific gravity of fully charge lead acid battery is 1075, (1.075).",
+          correct: "false",
+        },
+        {
+          q: "In fault finding imagination thinking is necessary.",
+          correct: "false",
+        },
+        {
+          q: "Even the main engine is running at varying sea speed the auto voltage regulator (AVR )maintains constant alternator frequency.",
+          correct: "false",
+        },
+        {
+          q: "The unit of resistance in DC current is Henry.",
+          correct: "false",
+        },
+        {
+          q: "Silver is an insulator.",
+          correct: "false",
+        },
+        {
+          q: "Electric current can flow in an insulator.",
+          correct: "false",
+        },
+        {
+          q: "Electric current can flow only in an opened path.",
+          correct: "false",
+        },
+        {
+          q: "Electrons carry Negative charge.",
+          correct: "true",
+        },
+      ];
+
+      const shortData = [
+        {
+          q: "Explain closed loop system?",
+          correct: "feedback ",
+        },
+        {
+          q: "What are the advantages of planned maintenance?",
+          correct: "efficiency",
+        },
+        {
+          q: "Why are preferential trips provided in generators?",
+          correct: "disconnect",
+        },
+        {
+          q: "State three different type of electrical fault and explain one?",
+          correct: "circuit",
+        },
+        {
+          q: "What are the possible reason for a motor folling to start ?",
+          correct: "losses",
+        },
+      ];
+
+      // Render Quiz
+      function init() {
+        // MCQ
+        let h1 = "";
+        mcqData.forEach((d, i) => {
+          h1 += `<div class="card">
+                                        <p><b>Q${i + 1}: ${d.q}</b></p>
+                                        ${d.options.map((opt, oi) => `<label><input type="radio" name="mcq${i}" value="${oi}"> ${opt}</label><br>`).join("")}
+                                        <div id="mcq-ans-${i}" class="ans-key" style="display:none; color: #ffcc00; margin-top:10px;">
+                                            <i class="fas fa-key"></i> Correct: ${d.options[d.correct]}
+                                        </div>
+                                    </div>`;
+        });
+        document.getElementById("mcq-container").innerHTML = h1;
+
+        // Part II: True or False Render
+        let h2 = "";
+        fillData.forEach((d, i) => {
+          h2 += `<div class="card">
+                            <p><b>Q${i + 1}: ${d.q}</b></p>
+                            <div class="tf-options">
+                                <label><input type="radio" name="tf${i}" value="true"> True</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="tf${i}" value="false"> False</label>
+                            </div>
+                            <div id="fill-ans-${i}" class="ans-key" style="display:none; color: #ffcc00; margin-top:10px;">
+                                <i class="fas fa-key"></i> Correct: ${d.correct.toUpperCase()}
+                            </div>
+                        </div>`;
+        });
+        document.getElementById("fill-container").innerHTML = h2;
+
+        // Part III: Short Questions Render
+        let h3 = "";
+        shortData.forEach((d, i) => {
+          h3 += `<div class="card">
+                  <p><b>Q${i + 1}: ${d.q}</b></p>
+                  <textarea id="short${i}" rows="3" placeholder="Type your answer here..."></textarea>
+                  </div>`;
+        });
+        document.getElementById("short-container").innerHTML = h3;
+      }
+      function calculateResult() {
+        let s1 = 0,
+          s2 = 0,
+          s3 = 0;
+
+        // Check MCQ & Show Color Feedback
+        mcqData.forEach((d, i) => {
+          const choices = document.querySelectorAll(`input[name="mcq${i}"]`);
+          const sel = document.querySelector(`input[name="mcq${i}"]:checked`);
+
+          // အရင်ဆုံး ရွေးချယ်စရာအားလုံးက label တွေကို ပုံမှန်အတိုင်း ပြန်လုပ်မယ်
+          choices.forEach((input) => {
+            input.parentElement.classList.remove(
+              "correct-choice",
+              "wrong-choice",
+            );
+          });
+
+          if (sel) {
+            const selectedValue = parseInt(sel.value);
+            if (selectedValue === d.correct) {
+              // မှန်ရင် အစိမ်းရောင်ပြမယ်
+              sel.parentElement.classList.add("correct-choice");
+              s1++;
+            } else {
+              // မှားရင် မောင်လေးရွေးတာကို အနီရောင်ပြမယ်
+              sel.parentElement.classList.add("wrong-choice");
+              // အဖြေမှန်ကိုပါ အစိမ်းရောင် တစ်ခါတည်း ဝိုင်းပြပေးမယ်
+              choices[d.correct].parentElement.classList.add("correct-choice");
+            }
+          } else {
+            // ဘာမှမရွေးထားရင်လည်း အဖြေမှန်ကို အစိမ်းနဲ့ ဝိုင်းပြမယ်
+            choices[d.correct].parentElement.classList.add("correct-choice");
+          }
+          document.getElementById(`mcq-ans-${i}`).style.display = "block";
+        });
+
+        // Check True/False & Show Color Feedback
+        fillData.forEach((d, i) => {
+          const choices = document.querySelectorAll(`input[name="tf${i}"]`);
+          const sel = document.querySelector(`input[name="tf${i}"]:checked`);
+
+          choices.forEach((input) =>
+            input.parentElement.classList.remove(
+              "correct-choice",
+              "wrong-choice",
+            ),
+          );
+
+          if (sel) {
+            if (sel.value === d.correct.toLowerCase()) {
+              sel.parentElement.classList.add("correct-choice");
+              s2++;
+            } else {
+              sel.parentElement.classList.add("wrong-choice");
+              // အဖြေမှန်ကို အစိမ်းနဲ့ပြမယ်
+              const correctBtn = Array.from(choices).find(
+                (c) => c.value === d.correct.toLowerCase(),
+              );
+              if (correctBtn)
+                correctBtn.parentElement.classList.add("correct-choice");
+            }
+          }
+          document.getElementById(`fill-ans-${i}`).style.display = "block";
+        });
+        // Check Short & Show Answers
+
+        // Part III: Short Questions Logic
+        shortData.forEach((d, i) => {
+          const inputField = document.getElementById(`short${i}`);
+          if (inputField) {
+            const userAns = inputField.value.trim().toLowerCase();
+            const correctKeyword = d.correct.trim().toLowerCase();
+
+            inputField.classList.remove("correct-choice", "wrong-choice");
+
+            // Keyword ပါရင် အမှတ်ပေးပြီး အစိမ်းပြမယ်
+            if (userAns !== "" && userAns.includes(correctKeyword)) {
+              inputField.classList.add("correct-choice");
+              s3++;
+            } else {
+              // မှားရင် (သို့မဟုတ်) အလွတ်ဖြစ်နေရင် အနီပြမယ်
+              inputField.classList.add("wrong-choice");
+            }
+          }
+        });
+        // Update Result Card
+        document.getElementById("p1-res").innerText =
+          `${s1} / ${mcqData.length}`;
+        document.getElementById("p2-res").innerText =
+          `${s2} / ${fillData.length}`;
+        document.getElementById("p3-res").innerText =
+          `${s3} / ${shortData.length}`;
+
+        const total = s1 + s2 + s3;
+        const max = mcqData.length + fillData.length + shortData.length;
+        const percent = Math.round((total / max) * 100);
+
+        document.getElementById("final-percent").innerText =
+          `Total: ${percent}%`;
+        const status = document.getElementById("final-status");
+        status.innerText = percent >= 50 ? "⚓ PASSED ⚓" : "FAILED 💔";
+        status.style.color = percent >= 50 ? "#00ff88" : "#ff4444";
+
+        document.getElementById("result-sheet").style.display = "block";
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+      let lastScrollTop = 0;
+
+      window.addEventListener(
+        "scroll",
+        function () {
+          let currentScroll =
+            window.pageYOffset || document.documentElement.scrollTop;
+          const header = document.querySelector(".main-header");
+
+          // Scroll Down လုပ်ရင် (အောက်ဆင်းရင်)
+          if (currentScroll > lastScrollTop && currentScroll > 50) {
+            header.classList.add("hidden");
+          }
+          // Scroll Up လုပ်ရင် (အပေါ်ပြန်တက်ရင်)
+          else {
+            header.classList.remove("hidden");
+          }
+
+          lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        },
+        false,
+      );
+
+      init();
+    </script>
+  </body>
+</html>
