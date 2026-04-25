@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="style_f2.css" />
   </head>
   <body>
+    <div class="timer-box" id="timer-container">
+  <i class="fas fa-clock"></i> <span id="time-display">02:00:00</span>
+</div>
     <header class="main-header">
       <div class="logo-area">
         <img src="download.png" alt="Logo" class="site-logo" />
@@ -389,6 +392,42 @@
         });
         document.getElementById("short-container").innerHTML = h3;
       }
+      // --- Timer Logic ---
+let totalSeconds = 2 * 60 * 60; // ၂ နာရီကို စက္ကန့်ပြောင်းခြင်း
+
+function startTimer() {
+  const display = document.getElementById("time-display");
+  
+  const timerInterval = setInterval(() => {
+    let hours = Math.floor(totalSeconds / 3600);
+    let minutes = Math.floor((totalSeconds % 3600) / 60);
+    let seconds = totalSeconds % 60;
+
+   
+    display.innerText = 
+      `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    if (totalSeconds <= 0) {
+      clearInterval(timerInterval);
+      alert;
+      calculateResult();
+    } else {
+      totalSeconds--;
+    }
+
+    
+    if (totalSeconds < 300) {
+      document.getElementById("timer-container").style.color = "#ff4444";
+      document.getElementById("timer-container").style.borderColor = "#ff4444";
+    }
+  }, 1000);
+}
+
+
+window.onload = function() {
+  init();
+  startTimer();
+};
       function calculateResult() {
         let s1 = 0,
           s2 = 0,
@@ -410,17 +449,17 @@
           if (sel) {
             const selectedValue = parseInt(sel.value);
             if (selectedValue === d.correct) {
-              // မှန်ရင် အစိမ်းရောင်ပြမယ်
+             
               sel.parentElement.classList.add("correct-choice");
               s1++;
             } else {
-              // မှားရင် မောင်လေးရွေးတာကို အနီရောင်ပြမယ်
+             
               sel.parentElement.classList.add("wrong-choice");
-              // အဖြေမှန်ကိုပါ အစိမ်းရောင် တစ်ခါတည်း ဝိုင်းပြပေးမယ်
+             
               choices[d.correct].parentElement.classList.add("correct-choice");
             }
           } else {
-            // ဘာမှမရွေးထားရင်လည်း အဖြေမှန်ကို အစိမ်းနဲ့ ဝိုင်းပြမယ်
+            
             choices[d.correct].parentElement.classList.add("correct-choice");
           }
           document.getElementById(`mcq-ans-${i}`).style.display = "block";
@@ -444,7 +483,7 @@
               s2++;
             } else {
               sel.parentElement.classList.add("wrong-choice");
-              // အဖြေမှန်ကို အစိမ်းနဲ့ပြမယ်
+              
               const correctBtn = Array.from(choices).find(
                 (c) => c.value === d.correct.toLowerCase(),
               );
@@ -465,12 +504,12 @@
 
             inputField.classList.remove("correct-choice", "wrong-choice");
 
-            // Keyword ပါရင် အမှတ်ပေးပြီး အစိမ်းပြမယ်
+         
             if (userAns !== "" && userAns.includes(correctKeyword)) {
               inputField.classList.add("correct-choice");
               s3++;
             } else {
-              // မှားရင် (သို့မဟုတ်) အလွတ်ဖြစ်နေရင် အနီပြမယ်
+             
               inputField.classList.add("wrong-choice");
             }
           }
@@ -508,11 +547,11 @@
             window.pageYOffset || document.documentElement.scrollTop;
           const header = document.querySelector(".main-header");
 
-          // Scroll Down လုပ်ရင် (အောက်ဆင်းရင်)
+         
           if (currentScroll > lastScrollTop && currentScroll > 50) {
             header.classList.add("hidden");
           }
-          // Scroll Up လုပ်ရင် (အပေါ်ပြန်တက်ရင်)
+         
           else {
             header.classList.remove("hidden");
           }
