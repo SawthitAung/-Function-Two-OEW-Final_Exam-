@@ -19,7 +19,7 @@ body {
   /* ၂။ နောက်ခံပုံ (Marine Space Galaxy Background) */
   background:
     linear-gradient(rgba(5, 11, 24, 0.8), rgba(5, 11, 24, 0.8)),
-    url("IMG_2223.JPG"); /* မောင်လေးရဲ့ ပင်လယ်နောက်ခံပုံ */
+    url("IMG_2223.JPG");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -39,12 +39,12 @@ body {
 /* --- ၃။ Header (Logo ဘေးမှာ Title ထားခြင်း) --- */
 .main-header {
   display: flex;
-  flex-direction: row; /* ဘေးချင်းယှဉ်မယ် */
-  align-items: center; /* အပေါ်အောက် အလယ်ညှိမယ် */
-  justify-content: center; /* အားလုံးကို အလယ်ပို့မယ် */
-  gap: 25px; /* Logo နဲ့ Title အကွာအဝေး */
+  flex-direction: row; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 25px; 
   margin-bottom: 50px;
-  flex-wrap: wrap; /* ဖုန်းမှာ နေရာမဆန့်ရင် အပေါ်အောက် အလိုအလျောက်ပြောင်းမယ် */
+  flex-wrap: wrap;
 }
 
 .site-logo {
@@ -128,6 +128,7 @@ input[type="radio"] {
   margin-right: 10px;
 }
 
+/* --- ၅။ Choices & Inputs --- */
 input[type="text"],
 textarea {
   width: 100%;
@@ -138,7 +139,18 @@ textarea {
   color: white;
   outline: none;
   margin-top: 10px;
+  
+ 
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical; 
 }
+
+textarea {
+  min-height: 150px; 
+  line-height: 1.5;
+}
+
 
 /* --- ၆။ Submit Button --- */
 .submit-btn {
@@ -165,7 +177,7 @@ textarea {
   box-shadow: 0 15px 30px rgba(0, 212, 255, 0.6);
 }
 
-/* --- ၇။ Sexy Result Sheet & Try Again Button --- */
+/* --- ၇။ Result Sheet & Try Again Button --- */
 #result-sheet {
   max-width: 650px;
   margin: 40px auto;
@@ -203,11 +215,11 @@ textarea {
   transform: translateY(-8px) scale(1.05);
   box-shadow: 0 20px 40px rgba(0, 212, 255, 0.6);
 }
-/* --- ၁။ Result Area တစ်ခုလုံးကို ဝိုင်းဝိုင်းလေးနဲ့ Sexy ကျအောင် --- */
+
 .final-score-area {
   text-align: center;
   padding: 40px 20px;
-  background: rgba(255, 255, 255, 0.05); /* မှန်ကြည် Background */
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   border-radius: 40px; /* Sexy Curves */
   border: 1.5px solid rgba(0, 212, 255, 0.2);
@@ -218,7 +230,7 @@ textarea {
 
 /* Total: 0% စာသား */
 #final-percent {
-  font-size: 3rem; /* အမှတ်ကို အကြီးကြီးပြမယ် */
+  font-size: 3rem;
   font-weight: 900;
   background: linear-gradient(to bottom, #ffffff, #00d4ff);
   -webkit-background-clip: text;
@@ -226,7 +238,7 @@ textarea {
   margin-bottom: 10px;
 }
 
-/* STATUS (PASSED/FAILED) စာသား */
+
 #final-status {
   font-size: 2.2rem;
   letter-spacing: 5px;
@@ -235,14 +247,14 @@ textarea {
   text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
 }
 
-/* --- ၂။ Try Again ခလုတ် (Big & Neon Version) --- */
+
 .nav-btn {
   display: block;
   width: 100%;
-  max-width: 320px; /* Laptop မှာ အရမ်းကြီးမသွားအောင် */
+  max-width: 320px; 
   margin: 20px auto;
 
-  /* ခလုတ်ကို ဖောင်းဖောင်းကြီးနဲ့ Sexy ကျစေမယ့် padding */
+ 
   padding: 20px 40px;
   font-size: 1.3rem;
   font-weight: 800;
@@ -250,35 +262,35 @@ textarea {
   letter-spacing: 3px;
 
   color: #ffffff;
-  /* Marine Blue Gradient */
+  
   background: linear-gradient(135deg, #00d4ff, #0055ff);
 
   border: none;
-  border-radius: 100px; /* လုံးဝဝိုင်းစက်နေတဲ့ ဆေးတောင့်ပုံစံ */
+  border-radius: 100px; 
 
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(0, 85, 255, 0.4);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-  /* ဖုန်းမှာ နှိပ်ရတာ ပိုကောင်းအောင် */
+  
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Mouse တင်လိုက်တဲ့အခါ (Hover) */
+
 .nav-btn:hover {
   transform: translateY(-8px) scale(1.05);
   box-shadow: 0 20px 40px rgba(0, 212, 255, 0.6);
   letter-spacing: 5px; /* စာသားလေး ကျယ်သွားရင် ပိုလန်းတယ် */
 }
 
-/* လက်နဲ့နှိပ်လိုက်တဲ့အခါ (Active) */
+
 .nav-btn:active {
   transform: translateY(2px) scale(0.96);
   box-shadow: 0 5px 15px rgba(0, 85, 255, 0.4);
 }
 
-/* --- 📱 ဖုန်းအတွက် Responsive ပြင်ဆင်ချက် --- */
+
 @media (max-width: 480px) {
   .final-score-area {
     padding: 30px 15px;
@@ -300,7 +312,7 @@ textarea {
   }
 }
 
-/* ပေါ်လာတဲ့အခါ Animation */
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -312,7 +324,7 @@ textarea {
   }
 }
 
-/* --- ၈။ Responsive (ဖုန်းအတွက်) --- */
+
 @media (max-width: 600px) {
   .main-header {
     flex-direction: column;
